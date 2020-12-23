@@ -65,4 +65,30 @@ class Task
         return $this->id;
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function isFinished(): bool
+    {
+        return $this->finished;
+    }
+
+    public function getDueDate(): ?\DateTime
+    {
+        return $this->dueDate;
+    }
+
+    public function getCreationDate(): \DateTimeImmutable
+    {
+        return $this->creationDate;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+
 }

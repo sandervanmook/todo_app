@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ViewTasksController extends AbstractController
+class ListTasksController extends AbstractController
 {
     private TaskRepository $taskRepository;
 
@@ -20,7 +20,7 @@ class ViewTasksController extends AbstractController
     }
 
     /**
-     * @Route("/task/viewlist", name="view_create")
+     * @Route("/task/viewlist", name="task_list")
      */
     public function view() : JsonResponse
     {
