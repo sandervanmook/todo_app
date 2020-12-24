@@ -23,7 +23,7 @@ class DeleteTaskController extends AbstractController
     /**
      * @Route("/task/delete/{id}", name="task_delete")
      */
-    public function delete($id): Response
+    public function __invoke($id): Response
     {
         try {
             Assertion::numeric($id);

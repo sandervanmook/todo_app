@@ -17,7 +17,7 @@ class AddTaskController extends AbstractController
     /**
      * @Route("/task/create", name="task_create")
      */
-    public function create(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $requestData = \json_decode($request->getContent());
 

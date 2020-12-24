@@ -21,7 +21,7 @@ class ListTasksController extends AbstractController
     /**
      * @Route("/task/viewlist", name="task_list")
      */
-    public function view(): JsonResponse
+    public function __invoke(): JsonResponse
     {
         $tasks = $this->taskRepository->findAllAsArray();
 

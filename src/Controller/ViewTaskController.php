@@ -26,7 +26,7 @@ class ViewTaskController
     /**
      * @Route("/task/view/{id}", name="task_view")
      */
-    public function view($id): Response
+    public function __invoke($id): Response
     {
         try {
             Assertion::numeric($id);
