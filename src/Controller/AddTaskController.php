@@ -8,6 +8,7 @@ use App\Entity\Task;
 use App\Model\CreateTaskRequest;
 use Assert\AssertionFailedException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AddTaskController extends AbstractController
 {
     /**
-     * @Route("/task/create", name="task_create")
+     * @Route("/task", name="task_create", methods={"POST"})
      */
     public function __invoke(Request $request): Response
     {
@@ -28,7 +29,11 @@ class AddTaskController extends AbstractController
         try {
             $createTaskRequest = new CreateTaskRequest($requestData);
         } catch (AssertionFailedException $e) {
-            return new Response($e->getMessage(), 400);
+            $errorInformation = [
+                'errorMessage' => $e->getMessage(),
+            ];
+
+            return new JsonResponse($errorInformation, 400);
         }
         $task = Task::fromAPI($createTaskRequest);
 

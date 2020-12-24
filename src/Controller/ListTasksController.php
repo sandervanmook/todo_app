@@ -19,7 +19,7 @@ class ListTasksController extends AbstractController
     }
 
     /**
-     * @Route("/task/viewlist", name="task_list")
+     * @Route("/tasks", name="task_list", methods={"GET"})
      */
     public function __invoke(): JsonResponse
     {

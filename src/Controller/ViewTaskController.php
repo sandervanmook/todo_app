@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use OpenApi\Annotations as SWG;
 
 class ViewTaskController
 {
@@ -24,7 +25,7 @@ class ViewTaskController
     }
 
     /**
-     * @Route("/task/view/{id}", name="task_view")
+     * @Route("/task/{id}", name="task_view", methods={"GET"})
      */
     public function __invoke($id): Response
     {
@@ -37,7 +38,11 @@ class ViewTaskController
         if ($task = $this->taskRepository->find($id)) {
             return new JsonResponse($this->serializer->serialize($task, 'json'), 200, [], true);
         } else {
-            return new Response(sprintf('Task with id %d not found', $id));
+            $errorInformation = [
+                'errorMessage' => sprintf('Task with id %d not found', $id),
+            ];
+
+            return new JsonResponse($errorInformation, 404);
         }
     }
 }

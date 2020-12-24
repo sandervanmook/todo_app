@@ -8,6 +8,7 @@ use App\Repository\TaskRepository;
 use Assert\Assertion;
 use Assert\AssertionFailedException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,7 +22,7 @@ class DeleteTaskController extends AbstractController
     }
 
     /**
-     * @Route("/task/delete/{id}", name="task_delete")
+     * @Route("/task/{id}", name="task_delete", methods={"DELETE"})
      */
     public function __invoke($id): Response
     {
@@ -36,9 +37,12 @@ class DeleteTaskController extends AbstractController
             $em->remove($task);
             $em->flush();
 
-            return new Response(sprintf('Task with id %d successfully deleted', $id), 200);
+            return new JsonResponse(null, 204);
         } else {
-            return new Response(sprintf('Could not find task with id %d', $id), 404);
+            $errorInformation = [
+                'errorMessage' => sprintf('Could not find task with id %d', $id),
+            ];
+            return new JsonResponse($errorInformation,404);
         }
     }
 }
