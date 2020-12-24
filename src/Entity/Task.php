@@ -7,7 +7,6 @@ namespace App\Entity;
 use App\Model\CreateTaskRequest;
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
  */
@@ -49,7 +48,7 @@ class Task
     {
     }
 
-    static public function fromAPI(CreateTaskRequest $createTaskRequest) : Task
+    public static function fromAPI(CreateTaskRequest $createTaskRequest): Task
     {
         $task = new Task();
         $task->name = $createTaskRequest->getName();
@@ -60,7 +59,7 @@ class Task
         return $task;
     }
 
-    public function getId() : int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -89,6 +88,4 @@ class Task
     {
         return $this->description;
     }
-
-
 }

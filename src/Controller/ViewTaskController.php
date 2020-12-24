@@ -26,7 +26,7 @@ class ViewTaskController
     /**
      * @Route("/task/view/{id}", name="task_view")
      */
-    public function view($id) : Response
+    public function view($id): Response
     {
         try {
             Assertion::numeric($id);
@@ -35,7 +35,7 @@ class ViewTaskController
         }
 
         if ($task = $this->taskRepository->find($id)) {
-            return new JsonResponse($this->serializer->serialize($task,  'json'),200,[], true);
+            return new JsonResponse($this->serializer->serialize($task, 'json'), 200, [], true);
         } else {
             return new Response(sprintf('Task with id %d not found', $id));
         }

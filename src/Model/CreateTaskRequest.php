@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Model;
-
 
 use Assert\Assertion;
 
@@ -20,17 +18,17 @@ class CreateTaskRequest
         Assertion::notBlank($requestData->name);
         $this->name = $requestData->name;
 
-        if (property_exists($requestData, "dueDate")) {
+        if (property_exists($requestData, 'dueDate')) {
             Assertion::date($requestData->dueDate, 'd-m-Y');
-            $this->dueDate = new \DateTime($requestData->dueDate) ? :null;
+            $this->dueDate = new \DateTime($requestData->dueDate) ?: null;
         }
 
-        $this->description = $requestData->description ? :null;
+        $this->description = $requestData->description ?: null;
 
         return $this;
     }
 
-    public function getName() :string
+    public function getName(): string
     {
         return $this->name;
     }

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\Controller;
 
 use App\Repository\TaskRepository;
@@ -22,11 +21,10 @@ class ListTasksController extends AbstractController
     /**
      * @Route("/task/viewlist", name="task_list")
      */
-    public function view() : JsonResponse
+    public function view(): JsonResponse
     {
         $tasks = $this->taskRepository->findAllAsArray();
 
         return new JsonResponse($tasks);
     }
-
 }
