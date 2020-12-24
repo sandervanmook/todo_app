@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CreateTaskRequestTest extends TestCase
 {
-    public function test_it_can_be_created_from_valid_request()
+    public function testItCanBeCreatedFromValidRequest()
     {
         $requestInput = [
             'name' => 'testname',
@@ -19,16 +19,16 @@ class CreateTaskRequestTest extends TestCase
             'dueDate' => '10-10-2020',
         ];
 
-        $request = New Request([],[],[],[],[],[],json_encode($requestInput));
+        $request = new Request([], [], [], [], [], [], json_encode($requestInput));
         $createTaskRequest = new CreateTaskRequest(json_decode($request->getContent()));
 
         $this->assertEquals('testname', $createTaskRequest->getName());
         $this->assertEquals('testdescription', $createTaskRequest->getDescription());
     }
 
-    public function test_it_throws_when_name_is_missing()
+    public function testItThrowsWhenNameIsMissing()
     {
-        $request = New Request();
+        $request = new Request();
 
         $this->expectException(AssertionFailedException::class);
         new CreateTaskRequest(json_decode($request->getContent()));
